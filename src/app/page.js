@@ -74,12 +74,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 w-full bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent pt-20 pb-8 px-6">
-        <ChatInterface
-          onSendMessage={handleSendMessage}
-          loading={loading}
-          traces={traces}
-        />
+      <div className="fixed z-50 bottom-0 left-0 w-full bg-gradient-to-t from-zinc-950 via-zinc-950 to-transparent pt-20 pb-8 px-6 pointer-events-none">
+        <div className="pointer-events-auto">
+          <ChatInterface
+            onSendMessage={handleSendMessage}
+            loading={loading}
+            traces={traces}
+          />
+        </div>
       </div>
     </main>
   );
