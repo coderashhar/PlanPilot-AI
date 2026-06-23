@@ -29,9 +29,10 @@ def search_places(query: str, location: str = "") -> List[Dict[str, Any]]:
             places.append({
                 "name": r.get("name"),
                 "rating": r.get("rating", 0.0),
-                "price_level": r.get("price_level", 0),
+                "price_level": r.get("price_level"),
                 "address": r.get("formatted_address"),
-                "types": r.get("types", [])
+                "types": r.get("types", []),
+                "place_id": r.get("place_id")
             })
         return places
     except Exception as e:

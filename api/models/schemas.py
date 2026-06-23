@@ -9,6 +9,7 @@ class Recommendation(BaseModel):
     score: float
     estimated_cost: Optional[float] = None
     reason: str
+    url: Optional[str] = None
     
 class WeatherData(BaseModel):
     condition: str

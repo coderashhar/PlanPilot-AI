@@ -31,8 +31,20 @@ def score_and_respond(state: AgentState) -> AgentState:
         rating_score = (place.get("rating", 3.0) / 5.0) * 100
         
         # Price score
-        price_level = place.get("price_level", 2)
+        raw_price_level = place.get("price_level")
+        price_level = raw_price_level if raw_price_level is not None else 2
         price_score = 100 - (abs(2 - price_level) * 20)
+        
+        # Cost mapping
+        cost = price_level * 500 if raw_price_level is not None else None
+        
+        # URL formatting
+        place_id = place.get("place_id")
+        place_url = None
+        if place_id:
+            import urllib.parse
+            encoded_name = urllib.parse.quote(place.get("name", "Unknown"))
+            place_url = f"https://www.google.com/maps/search/?api=1&query={encoded_name}&query_place_id={place_id}"
         
         # Weather score
         weather_score = 80 # default
@@ -46,8 +58,9 @@ def score_and_respond(state: AgentState) -> AgentState:
             Recommendation(
                 name=place.get("name", "Unknown"),
                 score=round(final_score, 1),
-                estimated_cost=price_level * 500, # Mock cost
-                reason=f"Selected based on {intent} profile. Rating: {place.get('rating')}"
+                estimated_cost=cost,
+                reason=f"Selected based on {intent} profile. Rating: {place.get('rating')}",
+                url=place_url
             )
         )
         

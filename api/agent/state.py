@@ -5,6 +5,7 @@ class AgentState(TypedDict):
     query: str
     intent: str
     location: str
+    required_tools: List[str]
     
     # Raw data from tools
     weather_data: Optional[Dict[str, Any]]

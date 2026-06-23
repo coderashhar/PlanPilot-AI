@@ -16,8 +16,8 @@ export default function Home() {
     
     // Simulate streaming trace panel
     setTraces([
-      { name: "Extracting Intent", status: "loading" },
-      { name: "Executing Tools (Weather, Places, Events)", status: "pending" },
+      { name: "Extracting Intent & Selecting Tools", status: "loading" },
+      { name: "Executing Required Tools", status: "pending" },
       { name: "Scoring & Generating Recommendations", status: "pending" }
     ]);
 
