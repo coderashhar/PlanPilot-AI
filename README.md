@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PlanPilot AI 🗺️
 
-## Getting Started
+**PlanPilot AI** is an intelligent, agentic local experience planner. It uses an autonomous LangGraph agent powered by Gemini to understand your intent, pull real-time data from various APIs (Google Places, Tavily Events, OpenWeather), and apply dynamic, deterministic scoring to provide the perfect recommendations for dining, outings, and events.
 
-First, run the development server:
+![PlanPilot AI Screenshot](./screenshot.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features ✨
+
+- **Intent-Aware AI**: Automatically understands if you're looking for a "rainy-day plan", a "budget-friendly dinner", or a "birthday celebration".
+- **Dynamic Tool Execution**: Intelligently selects and calls only the necessary APIs (Weather, Google Places, Events) to answer your query.
+- **Deterministic Scoring Engine**: Calculates recommendation scores dynamically based on your intent profile (e.g., heavily weighting weather for outdoor plans, or ratings for food discovery), ensuring explainable and reliable results.
+- **Real-Time Data**: Integrates with Google Places API for locations, OpenWeatherMap for weather contexts, and Tavily for live local events.
+- **Modern UI/UX**: Built with Next.js, TailwindCSS, and Framer Motion for a stunning, glassmorphic chat interface with micro-animations.
+- **Agent Trace Visualization**: A live Tool Trace panel shows exactly what the LangGraph agent is doing under the hood.
+
+## Architecture 🏗️
+
+This project uses a hybrid architecture:
+- **Frontend**: Next.js (App Router), React, TailwindCSS, Framer Motion, Lucide Icons.
+- **Backend**: FastAPI, Python, LangGraph (`StateGraph`), Pydantic.
+- **LLM**: Google Gemini (`gemini-2.5-flash`).
+
+## Getting Started 🚀
+
+### Prerequisites
+Make sure you have Node.js and Python 3.10+ installed.
+
+### 1. Environment Setup
+Create a `.env` file in the root directory and add your API keys:
+```env
+GOOGLE_API_KEY=your_gemini_api_key
+GOOGLE_PLACES_API_KEY=your_google_places_api_key
+TAVILY_API_KEY=your_tavily_api_key
+OPENWEATHERMAP_API_KEY=your_openweather_api_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Backend Setup (FastAPI + LangGraph)
+Initialize your Python virtual environment and install the dependencies:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+Start the backend server (runs on `http://127.0.0.1:8000`):
+```bash
+uvicorn api.index:app --reload
+```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3. Frontend Setup (Next.js)
+In a new terminal window, install the NPM dependencies:
+```bash
+npm install
+```
+Start the Next.js development server (runs on `http://localhost:3000`):
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) in your browser to start planning your experiences!
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment 🌐
+This project is configured to be deployed effortlessly on **Vercel**. 
+The `vercel.json` and `next.config.mjs` files are already set up to route `/api/*` traffic to the FastAPI Serverless Functions.
