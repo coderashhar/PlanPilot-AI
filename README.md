@@ -1,6 +1,6 @@
 # PlanPilot AI 🗺️
 
-**PlanPilot AI** is an intelligent, agentic local experience planner. It uses an autonomous LangGraph agent powered by Gemini to understand your intent, pull real-time data from various APIs (Google Places, Tavily Events, OpenWeather), and apply dynamic, deterministic scoring to provide the perfect recommendations for dining, outings, and events.
+**PlanPilot AI** is an intelligent, agentic local experience planner. It uses an autonomous LangGraph agent powered by LLM to understand your intent, pull real-time data from various APIs (Google Places, Tavily Events, OpenWeather), and apply dynamic, deterministic scoring to provide the perfect recommendations for dining, outings, and events.
 
 ![PlanPilot AI Screenshot](./screenshot.png)
 
